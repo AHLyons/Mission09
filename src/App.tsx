@@ -1,8 +1,9 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import collegeBasketBallTeams from "./CollegeBasketballTeams.json";
+import collegeBasketBallTeams from './CollegeBasketballTeams.json';
 interface Team {
   school: string;
   name: string;
@@ -19,11 +20,18 @@ class Band extends React.Component<Team> {
     const oneBand = this.props;
 
     return (
-      <div>
-        <h2>School Name: {oneBand.school}</h2>
-        <h2>Mascot: {oneBand.name}</h2>
-        <h2>City: {oneBand.city}</h2>
-        <h2>State: {oneBand.state}</h2>
+      <div className="col-md-4 mb-4">
+        <div className="card">
+          <div className="card-body">
+            <h2 className="card-title">{oneBand.school}</h2>
+            <h3 className="card-subtitle mb-2 text-muted">
+              Mascot: {oneBand.name}
+            </h3>
+            <p className="card-text">
+              Location: {oneBand.city}, {oneBand.state}
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -31,7 +39,7 @@ class Band extends React.Component<Team> {
 
 function Bandlist() {
   return (
-    <div>
+    <div className="row">
       {collegeBasketBallTeams.teams.map((team: Team) => (
         <Band key={team.school} {...team} />
       ))}
@@ -42,20 +50,8 @@ function Bandlist() {
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Welcome />
+      <Bandlist />
     </div>
   );
 }
